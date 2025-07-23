@@ -1,0 +1,36 @@
+CREATE DATABASE Biblioteca;
+GO
+USE Biblioteca;
+GO
+CREATE TABLE Libro(
+numLibro INT NOT NULL IDENTITY (1,1),
+numIsbn INT NOT NULL,
+Titulo VARCHAR(50) NOT NULL,
+Autor VARCHAR(20) NOT NULL,
+Cantidad INT NOT NULL,
+CONSTRAINT pk_Libro
+PRIMARY KEY (numLibro)
+);
+GO
+
+CREATE TABLE Lector(
+numLector INT NOT NULL IDENTITY (1,1),
+NumMem INT NOT NULL,
+Nombre VARCHAR(20) NOT NULL,
+ApellidoPaterno VARCHAR(20),
+ApellidoMaterno VARCHAR(20),
+CONSTRAINT pk_Lector
+PRIMARY KEY (numLector)
+);
+GO
+
+CREATE TABLE Presta(
+NumLector INT NOT NULL,
+NumLibro INT NOT NULL,
+CONSTRAINT fk_Lector_Presta
+FOREIGN KEY (NumLector)
+REFERENCES Lector(numLector),
+CONSTRAINT fk_Libro_Presta
+FOREIGN KEY (NumLibro)
+REFERENCES Libro(numLibro)
+);
